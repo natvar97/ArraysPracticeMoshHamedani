@@ -5,9 +5,9 @@ import java.util.Arrays;
 public class ArrayQueue {
 
     private int[] items;
-    int count = 0;
-    int front = 0;
-    int rear = 0;
+    private int count = 0;
+    private int front = 0;
+    private int rear = 0;
 
     public ArrayQueue(int capacity) {
         items = new int[capacity];
@@ -18,13 +18,33 @@ public class ArrayQueue {
         if (count == items.length)
             throw new IllegalStateException();
 
-        items[rear++] = item;
+        items[rear] = item;
+        rear = (rear + 1) % items.length;
         count++;
+
+        // [ 0 , 0 , 30 , 40 , 50]
+        //   0   1    2    3    4
+        // 5 -> 0
+        // 6 -> 1
+        // 7 -> 2
+        // 8 -> 3
+        // 9 -> 4
+        // 10 -> 0
+        // 11 -> 1
+
+
     }
 
-//    public int dequeue() {
-//
-//    }
+    public int dequeue() {
+        if (count == items.length)
+            throw new IllegalStateException();
+
+        int item = items[front];
+        items[front] = 0;
+        front = (front + 1) % items.length;
+        count--;
+        return item;
+    }
 
     @Override
     public String toString() {
