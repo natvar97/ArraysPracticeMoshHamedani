@@ -38,9 +38,9 @@ public class Stack {
     }
 
     public int min() {
-        var content = Arrays.copyOfRange(array , 0 , count);
+        var content = Arrays.copyOfRange(array, 0, count);
         int min = content[0];
-        for (int value : content){
+        for (int value : content) {
             if (min > value)
                 min = value;
         }
