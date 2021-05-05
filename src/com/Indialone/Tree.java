@@ -1,5 +1,7 @@
 package com.Indialone;
 
+import java.util.ArrayList;
+
 public class Tree {
     private Node root;
 
@@ -193,5 +195,52 @@ public class Tree {
         return false;
     }
 
+    public boolean isBinarySearchTree() {
+        return isBinarySearchTree(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private boolean isBinarySearchTree(Node root, int min, int max) {
+        if (root == null)
+            return true;
+
+        if (root.value < min && root.value > max)
+            return false;
+
+        return isBinarySearchTree(root.leftChild, min, root.value - 1)
+                && isBinarySearchTree(root.rightChild, root.value + 1, max);
+    }
+
+    public void swapRoot() {
+        var temp = root.leftChild;
+        root.leftChild = root.rightChild;
+        root.rightChild = temp;
+    }
+
+    public ArrayList<Integer> getNodesListAtDistance(int distance) {
+        var list = new ArrayList<Integer>();
+        getNodesListAtDistance(root, distance, list);
+        return list;
+    }
+
+    private void getNodesListAtDistance(Node root, int distance, ArrayList<Integer> list) {
+        if (root == null)
+            return;
+
+        if (distance == 0) {
+            list.add(root.value);
+            return;
+        }
+
+        getNodesListAtDistance(root.leftChild, distance - 1, list);
+        getNodesListAtDistance(root.rightChild, distance - 1, list);
+
+    }
+
+    public void traverseLevelOrder() {
+        for (int i = 0; i <= height(); i++) {
+            for (var value : getNodesListAtDistance(i))
+                System.out.println(value);
+        }
+    }
 
 }
