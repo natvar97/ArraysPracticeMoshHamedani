@@ -1,16 +1,13 @@
 package com.Indialone;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
-        Tree tree = new Tree();
-        tree.insert(7);
-//        tree.insert(4);
-//        tree.insert(6);
-//        tree.insert(1);
-//        tree.insert(9);
-//        tree.insert(8);
-//        tree.insert(10);
-        tree.traverseLevelOrder();
+        int[] numbers  = { 5 , 2 , 3 , 8 , 6  };
+        var bubbleSort = new QuickSort();
+        bubbleSort.sort(numbers);
+        System.out.println(Arrays.toString(numbers));
     }
 
 }
